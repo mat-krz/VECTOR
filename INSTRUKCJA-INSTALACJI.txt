@@ -1,0 +1,61 @@
+﻿# INSTRUKCJA INSTALACJI - VECTOR GEODEZJA
+## Strona WWW z formularzem kontaktowym
+
+###  WYMAGANIA SERWERA
+- PHP 7.4+ z rozszerzeniami: curl, json, openssl
+- Apache z .htaccess (lub Nginx z odpowiednimi regułami)
+- SSL/HTTPS (Let's Encrypt lub płatny certyfikat)
+- Subdomena api.vector-geodezja.pl wskazująca na ten sam serwer
+
+###  INSTALACJA
+
+#### 1. PRZYGOTOWANIE DOMENY
+a) Główna domena: vector-geodezja.pl  wskazuje na public_html
+b) Subdomena: api.vector-geodezja.pl  wskazuje na public_html/api
+
+#### 2. UPLOAD PLIKÓW
+1. Wszystkie pliki z głównego katalogu wrzuć do public_html/
+2. Folder /api/ już jest w odpowiednim miejscu
+3. Upewnij się, że struktura jest następująca:
+   `
+   public_html/
+    index.html (strona główna)
+    assets/ (CSS, JS, obrazy)
+    favicon.png
+    polityka-prywatnosci.html
+    api/
+        send.php (endpoint formularza)
+        config.php (konfiguracja)
+        .env (dane SMTP)
+        .htaccess (zabezpieczenia)
+        logs/ (logi)
+        vendor/ (PHPMailer)
+   `
+
+#### 3. KONFIGURACJA APACHE/DNS
+- api.vector-geodezja.pl musi wskazywać na ten sam serwer
+- Można użyć CNAME lub A record w DNS
+- Subdomena musi mieć SSL (Let's Encrypt automatycznie)
+
+#### 4. TESTY
+1. Otwórz https://vector-geodezja.pl
+2. Wypełnij formularz kontaktowy
+3. Sprawdź czy wiadomość dociera na biuro@vector-geodezja.pl
+4. W przypadku problemów sprawdź logi w api/logs/
+
+###  ROZWIĄZYWANIE PROBLEMÓW
+
+#### Błąd CORS:
+- Sprawdź czy api.vector-geodezja.pl odpowiada
+- Upewnij się, że .htaccess jest aktywny
+
+#### Błędy email:
+- Sprawdź api/logs/ czy są logi błędów
+- Dane SMTP są w .env (nie zmieniaj!)
+
+#### Formularz nie działa:
+- Sprawdź czy PHP ma dostęp do api/send.php
+- Sprawdź uprawnienia folderów (755) i plików (644)
+
+###  KONTAKT
+W przypadku problemów: biuro@vector-geodezja.pl
